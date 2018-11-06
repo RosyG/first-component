@@ -1,0 +1,61 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<!-- <link rel="import" href="./bower_components/iron-collapse/iron-collapse.html"> -->
+<script ></script>
+<dom-module id="instrumento-musical">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[name]]!</h2>
+    <p on-click="blurClasification">Clasificación: [[clasification]]</p>
+    <p>[[description]]</p>
+
+    <template
+      is="dom-repeat"
+      items="{{collection}}"
+      as="code">
+      <p>{{code.name}} tiene la edad de  {{code.age}}</p>
+
+    </template>
+
+    <!-- <input type="text" value="{{Inp}}"> -->
+
+  </template>
+
+  <script>
+    /**
+     * `instrumento-musical`
+     * Example of tutorial
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class InstrumentoMusical extends Polymer.Element {
+      static get is() { return 'instrumento-musical'; }
+      static get properties() {
+        return {
+          name: String,
+          clasification: {
+            type: String,
+            value: "Sin clasificar"
+          },
+          description: String,
+          Inp: String,
+          collection: {
+            type: Array,
+            value: () => [{name:'je', age:23},{name:'Hes', age:2},{name:'Pol', age:3}]
+          }
+        };
+      }
+      blurClasification (){
+        this.clasification = this.clasification.toUpperCase(); 
+        
+      }
+    }
+
+    window.customElements.define(InstrumentoMusical.is, InstrumentoMusical);
+  </script>
+</dom-module>
