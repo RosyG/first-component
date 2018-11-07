@@ -7,18 +7,29 @@
       :host {
         display: block;
       }
+      :host .styleBox {
+        display: inline-block;
+        flex-direction: row;
+        border: 3px double #369;
+        height: 2em;
+        width: 5em;
+        overflow:hidden;
+      }
     </style>
     <h2>Hello [[name]]!</h2>
     <p on-click="blurClasification">Clasificación: [[clasification]]</p>
     <p>[[description]]</p>
-
+    <input type="text" placeholder="Mensaje" value="{{content::input}}">
+    <input type="number" placeholder="Number" on-keyup="_changeLengthBox" value="{{numberBox::input}}">
+    <hr>
     <template
       is="dom-repeat"
       items="{{collection}}"
       as="code">
-      <p>{{code.name}} tiene la edad de  {{code.age}}</p>
+      <div class="styleBox">{{content}}</div>
 
     </template>
+
 
     <!-- <input type="text" value="{{Inp}}"> -->
 
@@ -44,15 +55,25 @@
           },
           description: String,
           Inp: String,
+          numberBox: Number,
           collection: {
-            type: Array,
-            value: () => [{name:'je', age:23},{name:'Hes', age:2},{name:'Pol', age:3}]
-          }
+            type: Array
+          },
+          content: {
+            type: String,
+            value: 'per'
+          },
+          mesage: String
         };
       }
       blurClasification (){
         this.clasification = this.clasification.toUpperCase(); 
-        
+      }
+
+      _changeLengthBox (){
+        if(this.numberBox){
+        this.collection = Array(parseInt(this.numberBox));
+        }
       }
     }
 
